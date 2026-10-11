@@ -1,0 +1,157 @@
+-- ==========================================================
+-- ARAÇ KİRALAMA VERİTABANI YÖNETİM SİSTEMİ (Car Rental System)
+-- ==========================================================
+
+CREATE DATABASE IF NOT EXISTS arac_kiralama_sistemi;
+USE arac_kiralama_sistemi;
+
+-- ----------------------------------------------------------
+-- 1. TABLOLARI OLUŞTURMA (Create Tables)
+-- ----------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS Araclar (
+    Arac_id INT AUTO_INCREMENT PRIMARY KEY,
+    Marka VARCHAR(50),
+    Model VARCHAR(50),
+    Yil INT,
+    GunlukUcret DECIMAL(10,2),
+    Durum VARCHAR(20)
+);
+
+CREATE TABLE IF NOT EXISTS Musteriler (
+    Musteri_id INT AUTO_INCREMENT PRIMARY KEY,
+    Ad VARCHAR(50),
+    Soyad VARCHAR(50),
+    Telefon VARCHAR(15),
+    Email VARCHAR(50)
+);
+
+CREATE TABLE IF NOT EXISTS Hizmetler (
+    Hizmet_id INT AUTO_INCREMENT PRIMARY KEY,
+    HizmetAdi VARCHAR(50),
+    Ucret DECIMAL(10,2)
+);
+
+CREATE TABLE IF NOT EXISTS Kiralamalar (
+    Kiralama_id INT AUTO_INCREMENT PRIMARY KEY,
+    Musteri_id INT,
+    Arac_id INT,
+    BaslangicTarihi DATE,
+    BitisTarihi DATE,
+    FOREIGN KEY (Musteri_id) REFERENCES Musteriler(Musteri_id),
+    FOREIGN KEY (Arac_id) REFERENCES Araclar(Arac_id)
+);
+
+-- ----------------------------------------------------------
+-- 2. VERİ EKLEME (Insert Sample Data)
+-- ----------------------------------------------------------
+
+INSERT INTO Araclar (Marka, Model, Yil, GunlukUcret, Durum) VALUES
+('Renault', 'Clio', 2020, 500, 'Uygun'),
+('Fiat', 'Egea', 2021, 550, 'Kirada'),
+('Volkswagen', 'Golf', 2019, 600, 'Uygun'),
+('Ford', 'Focus', 2018, 580, 'Bakımda'),
+('Toyota', 'Corolla', 2022, 620, 'Uygun'),
+('Opel', 'Corsa', 2017, 470, 'Kirada'),
+('Hyundai', 'i20', 2021, 510, 'Uygun'),
+('Honda', 'Civic', 2019, 650, 'Uygun'),
+('Peugeot', '308', 2020, 560, 'Kirada'),
+('Citroen', 'C3', 2018, 490, 'Bakımda'),
+('Nissan', 'Qashqai', 2021, 700, 'Uygun'),
+('Kia', 'Rio', 2020, 520, 'Uygun'),
+('Mazda', '3', 2019, 680, 'Kirada'),
+('Skoda', 'Octavia', 2022, 640, 'Uygun'),
+('Seat', 'Leon', 2017, 550, 'Bakımda'),
+('BMW', '3 Series', 2021, 900, 'Uygun'),
+('Mercedes', 'A180', 2020, 950, 'Kirada'),
+('Audi', 'A3', 2019, 920, 'Uygun'),
+('Volvo', 'S60', 2021, 970, 'Bakımda'),
+('Suzuki', 'Swift', 2018, 480, 'Uygun');
+
+INSERT INTO Musteriler (Ad, Soyad, Telefon, Email) VALUES
+('Ahmet', 'Yılmaz', '05551112233', 'ahmet@gmail.com'),
+('Ayşe', 'Kaya', '05552223344', 'ayse@gmail.com'),
+('Mehmet', 'Demir', '05553334455', 'mehmet@gmail.com'),
+('Fatma', 'Çelik', '05554445566', 'fatma@gmail.com'),
+('Ali', 'Şahin', '05555556677', 'ali@gmail.com'),
+('Zeynep', 'Arslan', '05556667788', 'zeynep@gmail.com'),
+('Mustafa', 'Doğan', '05557778899', 'mustafa@gmail.com'),
+('Elif', 'Koç', '05558889900', 'elif@gmail.com'),
+('Emre', 'Aydın', '05559990011', 'emre@gmail.com'),
+('Hülya', 'Öztürk', '05560001122', 'hulya@gmail.com'),
+('Burak', 'Kurt', '05561112233', 'burak@gmail.com'),
+('Buse', 'Polat', '05562223344', 'buse@gmail.com'),
+('Yusuf', 'Aksoy', '05563334455', 'yusuf@gmail.com'),
+('Hatice', 'Karaca', '05564445566', 'hatice@gmail.com'),
+('Murat', 'Yıldırım', '05565556677', 'murat@gmail.com'),
+('Gözde', 'Taş', '05566667788', 'gozde@gmail.com'),
+('Kemal', 'Eren', '05567778899', 'kemal@gmail.com'),
+('Merve', 'Bal', '05568889900', 'merve@gmail.com'),
+('Onur', 'Akar', '05569990011', 'onur@gmail.com'),
+('Seda', 'Keskin', '05570001122', 'seda@gmail.com');
+
+INSERT INTO Kiralamalar (Musteri_id, Arac_id, BaslangicTarihi, BitisTarihi) VALUES
+(1,1,'2025-05-01','2025-05-05'),
+(2,2,'2025-05-02','2025-05-06'),
+(3,3,'2025-05-03','2025-05-07'),
+(4,4,'2025-05-04','2025-05-08'),
+(5,5,'2025-05-05','2025-05-09'),
+(6,6,'2025-05-06','2025-05-10'),
+(7,7,'2025-05-07','2025-05-11'),
+(8,8,'2025-05-08','2025-05-12'),
+(9,9,'2025-05-09','2025-05-13'),
+(10,10,'2025-05-10','2025-05-14'),
+(11,11,'2025-05-11','2025-05-15'),
+(12,12,'2025-05-12','2025-05-16'),
+(13,13,'2025-05-13','2025-05-17'),
+(14,14,'2025-05-14','2025-05-18'),
+(15,15,'2025-05-15','2025-05-19'),
+(16,16,'2025-05-16','2025-05-20'),
+(17,17,'2025-05-17','2025-05-21'),
+(18,18,'2025-05-18','2025-05-22'),
+(19,19,'2025-05-19','2025-05-23'),
+(20,20,'2025-05-20','2025-05-24');
+
+INSERT INTO Hizmetler (HizmetAdi, Ucret) VALUES
+('Kasko Sigortası', 150),
+('Ek Sürücü', 100),
+('Bebek Koltuğu', 50),
+('GPS', 75),
+('Kar Zinciri', 40),
+('Havalimanı Teslim', 200),
+('Full Yakıt', 300),
+('Hızlı Geçiş Etiketi', 90),
+('Yol Yardım', 120),
+('Lastik Değişimi', 80),
+('Araç Temizleme', 60),
+('Şehir Dışı Kullanım', 250),
+('Mini Onarım', 130),
+('Vale Hizmeti', 110),
+('Check-in Hizmeti', 95),
+('Vale Park', 85),
+('Ek Bagaj', 70),
+('Premium Sigorta', 350),
+('Araç Yıkama', 45),
+('Kış Lastiği', 160);
+
+-- ----------------------------------------------------------
+-- 3. ÖRNEK SQL SORGULARI (Sample Queries & Operations)
+-- ----------------------------------------------------------
+
+-- Aktif kirada olan araçlar ve müşteri detayları
+SELECT m.Ad, m.Soyad, a.Marka, a.Model, k.BaslangicTarihi, k.BitisTarihi
+FROM Kiralamalar k
+JOIN Musteriler m ON k.Musteri_id = m.Musteri_id
+JOIN Araclar a ON k.Arac_id = a.Arac_id
+WHERE a.Durum = 'Kirada';
+
+-- Araçları günlük ücrete göre azalan sırada listeleme
+SELECT Marka, Model, GunlukUcret, Durum
+FROM Araclar
+ORDER BY GunlukUcret DESC;
+
+-- Müşterilerin toplam kiralama adetleri
+SELECT m.Ad, m.Soyad, COUNT(k.Kiralama_id) AS KiralamaSayisi
+FROM Musteriler m
+JOIN Kiralamalar k ON m.Musteri_id = k.Musteri_id
+GROUP BY m.Musteri_id;
